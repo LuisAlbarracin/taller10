@@ -1,1 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
+.miCursor {
+  cursor: pointer;
+  text-decoration: none;
+}
+.papeleraRoja {
+  color: #9e2702;
+}
+
+.papeleraGris {
+  color: #a09898;
+}
+
+.manito tr {
+  cursor: pointer;
+}
+
+.chequeo {
+  font-size: 18px;
+  color: #9e2702;
+}
+
+.negrita {
+  font-weight: bold;
+}
+
+/* Para breadcrumb con angular */
+ol li a[ng-reflect-router-link] {
+  color: #9e2702;
+  text-decoration: none;
+}
+
+/* Para breadcrumb sin angular */
+ol li a {
+  color: #9e2702;
+  text-decoration: none;
+}
