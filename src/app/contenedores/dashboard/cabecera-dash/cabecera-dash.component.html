@@ -1,1 +1,60 @@
-<p>cabecera-dash works!</p>
+<header class="container-fluid ">
+  <div class="p-2 bg-dark">
+    <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+
+      &nbsp;<img src="../assets/imagenes/logo.png" alt="logo" class="px-4" />
+
+      <ul class="nav col-12 col-lg-auto me-lg-auto justify-content-center mb-md-0">
+        <li class="nav-item ml-5">
+          <a class="nav-link link-secondary" [routerLink]="['/private/root']" routerLinkActive="link-light" >Inicio</a>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle px-2 link-secondary" href="#" id="navbarDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Jugador
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" >Listar</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" >Crear</a></li>
+            <li><a class="dropdown-item" >Administrar</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle px-2 link-secondary" href="#" id="navbarDropdown" role="button"
+            data-bs-toggle="dropdown" aria-expanded="false">
+            Equipo
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <li><a class="dropdown-item" [routerLink]="['/private/player/list']" routerLinkActive="active"  >Listar</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item" [routerLink]="['/private/player/create']" routerLinkActive="active" >Crear</a></li>
+            <li><a class="dropdown-item" [routerLink]="['/private/player/manage']" routerLinkActive=" active" >Administrar</a></li>
+          </ul>
+        </li>
+
+      </ul>
+
+      <div class="dropdown text-end">
+        <a href="#" class="d-block link-light text-decoration-none dropdown-toggle" id="dropdownUser1"
+          data-bs-toggle="dropdown" aria-expanded="false">
+          <img [src]="'data:image/png;base64,'" onerror="this.src='../../assets/imagenes/noEncontrada.png'" class="rounded-circle" width="32" height="32">
+        </a>
+        <ul class="dropdown-menu text-small" aria-labelledby="dropdownUser1">
+          <li><a class="dropdown-item" >Editar</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
+          <li><a class="dropdown-item">Salir</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</header>

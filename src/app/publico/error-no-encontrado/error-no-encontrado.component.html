@@ -12,9 +12,11 @@
         </span>
 
         <p class="mt-5 fs-4 text-center">
-          <a class="miCursor">
+          <a class="miCursor" [routerLink]="['/home']">
             <img src="../assets/imagenes/error404.png" alt="error cargando la imagen">
-            <br />
+          </a>
+          <br />
+          <a (click)="regresar()" class="miCursor">
             <i class="fa fa-reply papeleraRoja"></i> regresar</a>
         </p>
       </div>

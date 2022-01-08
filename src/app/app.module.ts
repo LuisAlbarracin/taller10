@@ -18,8 +18,12 @@ import { AccesoComponent } from './publico/acceso/acceso.component';
 import { ErrorNoEncontradoComponent } from './publico/error-no-encontrado/error-no-encontrado.component';
 import { InicioComponent } from './publico/inicio/inicio.component';
 import { DesarrolladorComponent } from './publico/desarrollador/desarrollador.component';
-import { JugadorComponent } from './private/jugador/jugador.component';
-import { EquipoComponent } from './private/equipo/equipo.component';
+import { EquipoComponent } from './privado/equipo/equipo.component';
+import { JugadorAdministrarComponent } from './privado/jugador/jugador-administrar/jugador-administrar.component';
+import { JugadorListarComponent } from './privado/jugador/jugador-listar/jugador-listar.component';
+import { JugadorCrearComponent } from './privado/jugador/jugador-crear/jugador-crear.component';
+import { JugadorEditarComponent } from './privado/jugador/jugador-editar/jugador-editar.component';
+import { JugadorPrincipalComponent } from './privado/jugador/jugador-principal/jugador-principal.component';
 
 
 @NgModule({
@@ -35,8 +39,12 @@ import { EquipoComponent } from './private/equipo/equipo.component';
     ErrorNoEncontradoComponent,
     InicioComponent,
     DesarrolladorComponent,
-    JugadorComponent,
-    EquipoComponent
+    EquipoComponent,
+    JugadorAdministrarComponent,
+    JugadorListarComponent,
+    JugadorCrearComponent,
+    JugadorEditarComponent,
+    JugadorPrincipalComponent
   ],
   imports: [
     BrowserModule,

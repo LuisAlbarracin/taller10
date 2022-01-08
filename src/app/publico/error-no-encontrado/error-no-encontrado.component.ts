@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ErrorNoEncontradoComponent implements OnInit {
 
-  constructor() { }
+  constructor(private destino: Location) {}
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  public regresar():void{
+    this.destino.back();
   }
 
 }

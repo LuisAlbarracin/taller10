@@ -1,1 +1,26 @@
-<p>cabecera-land works!</p>
+<div class="container-fluid">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a [routerLink]="['/home']">
+      <img src="../assets/imagenes/logo.png" alt="logo" class="px-4" />
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#codBarraMenu"
+      aria-controls="codBarraMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="codBarraMenu">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item ml-5">
+          <a class="nav-link" [routerLink]="['/public/root']" routerLinkActive="active" >Inicio</a>
+        </li>
+        <li class="nav-item ml-5">
+          <a class="nav-link" [routerLink]="['/public/dev']" routerLinkActive="active" >Equipo de desarrollo</a>
+        </li>
+      </ul>
+      <a class="navbar-brand navbar-text" [routerLink]="['/public/login']" routerLinkActive="active" >Iniciar sesión</a>
+    </div>
+
+  </nav>
+</div>
+
