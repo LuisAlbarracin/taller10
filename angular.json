@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "taller09": {
+    "taller10": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/taller09",
+            "outputPath": "dist/taller10",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -75,11 +75,11 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "taller09:build:production",
+              "browserTarget": "taller10:build:production",
               "port": 8095
             },
             "development": {
-              "browserTarget": "taller09:build:development",
+              "browserTarget": "taller10:build:development",
               "port": 8096
             }
           },
@@ -88,7 +88,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "taller09:build"
+            "browserTarget": "taller10:build"
           }
         },
         "test": {
@@ -111,5 +111,5 @@
       }
     }
   },
-  "defaultProject": "taller09"
+  "defaultProject": "taller10"
 }
