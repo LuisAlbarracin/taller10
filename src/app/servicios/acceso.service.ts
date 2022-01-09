@@ -1,7 +1,8 @@
+import { RespuestaLogin } from './../modelos/respuesta-login.model';
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import jwtDeco from 'jwt-decode';
 import { Imagen } from '../modelos/imagen.model';
 import { Usuario } from '../modelos/usuario.model';
 import * as lasRutas from './../utilidades/dominios/uris';
@@ -41,15 +42,27 @@ export class AccesoService {
     this.router.navigate(['/public/login']);
   }
 
-  public obtenerToken(): any{
+  public obtenerToken(): any {
     return localStorage.getItem('token');
   }
 
   // Favor no trabajar con any
-  public iniciarSesion(miUsuario: Usuario): Observable<any>{
-    return this.http.post<any>(this.rutaBackendInicio, miUsuario);
+  public iniciarSesion(miUsuario: Usuario): Observable<RespuestaLogin> {
+    return this.http.post<RespuestaLogin>(this.rutaBackendInicio, miUsuario);
   }
 
-  // Falta un metodo para verificar si el usuario es valido
-
+  public verificarUsuario(): boolean {
+    if (localStorage.getItem('token')) {
+      let miToken: any = this.obtenerToken();
+      try {
+        let objetoTemporal: any = jwtDeco(miToken);
+        this.objUsuario.codigousuario = objetoTemporal.id;
+        this.objUsuario.correousuario = objetoTemporal.correo;
+        return true;
+      } catch {
+        return false;
+      }
+    }
+    return false;
+  }
 }

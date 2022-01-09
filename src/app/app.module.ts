@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import {  FormsModule } from '@angular/forms';
-import {  ToastrModule  } from 'ngx-toastr';
-import {  ModalModule } from 'ngx-bootstrap/modal';
-import {  BrowserAnimationsModule  } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { ToastrModule } from 'ngx-toastr';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CabeceraDashComponent } from './contenedores/dashboard/cabecera-dash/cabecera-dash.component';
 import { ContenedorDashComponent } from './contenedores/dashboard/contenedor-dash/contenedor-dash.component';
 import { InicioDashComponent } from './contenedores/dashboard/inicio-dash/inicio-dash.component';
@@ -54,7 +57,10 @@ import { JugadorPrincipalComponent } from './privado/jugador/jugador-principal/j
     ToastrModule.forRoot(),
     ModalModule.forRoot(),
     BrowserAnimationsModule,
+    HttpClientModule,
+    NgxPaginationModule
   ],
+  // Incluir el interceptor
   providers: [],
   bootstrap: [AppComponent]
 })

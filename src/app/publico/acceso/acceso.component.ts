@@ -1,13 +1,16 @@
+import { RespuestaLogin } from './../../modelos/respuesta-login.model';
+import { AccesoService } from './../../servicios/acceso.service';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Usuario } from 'src/app/modelos/usuario.model';
-import { Imagen } from 'src/app/modelos/imagen.model';
-import { ARREGLO_USUARIO } from 'src/app/mocks/usuario.mock';
-import { mostrarMensaje } from 'src/app/utilidades/mensajes/mensajes-toast.func';
+import { Usuario } from '../../modelos/usuario.model';
+import { Imagen } from '../../modelos/imagen.model';
+import { mostrarMensaje } from '../../utilidades/mensajes/mensajes-toast.func';
 import { NgForm } from '@angular/forms';
 
 import * as cifrado from 'js-sha512';
+import { miObservadorAny } from '../../utilidades/observadores/observador-any';
+import { catchError, map } from 'rxjs';
 
 @Component({
   selector: 'app-acceso',
@@ -16,12 +19,10 @@ import * as cifrado from 'js-sha512';
 })
 export class AccesoComponent implements OnInit {
 
-  public arregloUsuarios: Usuario[];
   public usuarioSeleccionado: Usuario;
   public patronCorreo = '^[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$';
 
-  constructor(public router: Router, public miMensaje: ToastrService) {
-    this.arregloUsuarios = ARREGLO_USUARIO;
+  constructor(public router: Router, public miMensaje: ToastrService, public accesoService: AccesoService) {
     this.usuarioSeleccionado = this.inicializarUsuario();
   }
 
@@ -34,42 +35,25 @@ export class AccesoComponent implements OnInit {
   }
 
   // Logica del negocio
-  public iniciarSesion(): void {
-    localStorage.setItem('codUsuario', this.usuarioSeleccionado.codigousuario.toString());
-    localStorage.setItem('token', 'Este es el token ultra secreto');
-
-    this.router.navigate(['/private/root']);
-    mostrarMensaje('success', 'Bienvenido al Sistema', 'Inicio Sesión', this.miMensaje);
-  }
-
-  public errorSession(formulario: NgForm): void{
-    formulario.resetForm();
-    this.usuarioSeleccionado = this.inicializarUsuario();
-    mostrarMensaje('error', 'Contraseña Incorrecta', 'Error de Sesión', this.miMensaje);
-  }
-
-  public validarDatos(formulario: NgForm): void{
-    // Esto es lo que vamos a cambiar por el backend
-
-    let encontrado = false;
+  public validarDatos(formulario: NgForm): void {
     const miHash = cifrado.sha512(this.usuarioSeleccionado.claveusuario);
+    const miCorreo = this.usuarioSeleccionado.correousuario;
+    const miUsuario = new Usuario(0, new Imagen(0, '', '', '', '', '', ''), '', '', '', '', miCorreo, miHash);
 
-    //console.log('---> Clave digitada por consola: ', miHash);
+    this.accesoService.iniciarSesion(miUsuario).pipe(
+      map((miRespuesta: RespuestaLogin) => {
+        mostrarMensaje('success', 'Bienvenido al Sistema', 'Inicio Sesión', this.miMensaje)
+        localStorage.setItem('token', miRespuesta.tokenLogin);
+        localStorage.setItem('foto', miRespuesta.base64Login);
+        this.router.navigate(['/private/root']);
+      }),
+      catchError((miError) => {
+        mostrarMensaje('error', 'Usuario o Contraseña Invalido', 'Fallo Sesión', this.miMensaje);
+        throw miError;
+      })
+    ).subscribe(miObservadorAny);
 
-    this.arregloUsuarios.forEach((miUsuario) => {
-      //console.log('---> Clave base de datos: ', miUsuario.claveusuario)
-      if(miUsuario.correousuario == this.usuarioSeleccionado.correousuario && miUsuario.claveusuario == miHash){
-        this.usuarioSeleccionado = miUsuario;
-        encontrado = true;
-      }
-    });
-
-    if(encontrado){
-      this.iniciarSesion();
-    }else{
-      this.errorSession(formulario);
-    }
-
+    formulario.resetForm();
   }
 
 
