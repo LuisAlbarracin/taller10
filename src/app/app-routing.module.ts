@@ -1,3 +1,4 @@
+import { VigilanteGuard } from './vigilante.guard';
 import { JugadorEditarComponent } from './privado/jugador/jugador-editar/jugador-editar.component';
 import { JugadorListarComponent } from './privado/jugador/jugador-listar/jugador-listar.component';
 import { JugadorCrearComponent } from './privado/jugador/jugador-crear/jugador-crear.component';
@@ -48,7 +49,8 @@ const routes: Routes = [
 
       { path: '', redirectTo: 'root', pathMatch: 'full' },
       { path: '**', component: ErrorNoEncontradoComponent }
-    ]
+    ],
+    canActivate: [VigilanteGuard]
   },
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: ErrorNoEncontradoComponent }

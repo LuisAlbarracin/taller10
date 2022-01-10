@@ -1,3 +1,5 @@
+import { AccesoService } from './../../../servicios/acceso.service';
+import { Usuario } from './../../../modelos/usuario.model';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,7 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CabeceraDashComponent implements OnInit {
 
-  constructor() { }
+  public usuarioSeleccionado: Usuario;
+  public base64FotoPerfil: string;
+
+  constructor(public accesoService: AccesoService) {
+    this.usuarioSeleccionado = accesoService.obtenerUsuario();
+    this.base64FotoPerfil = localStorage.getItem('foto') as string;
+  }
 
   ngOnInit(): void {
   }
